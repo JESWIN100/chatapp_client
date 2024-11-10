@@ -98,7 +98,7 @@ setMessage([...messages,data])
 
 
   return (
-    <div className="md:min-w-[900px] h-screen flex flex-col py-4 bg-gray-100 rounded-lg shadow-lg">
+    <div className="md:min-w-[99%] h-screen flex flex-col py-4 bg-gray-100 rounded-lg shadow-lg">
     {selectedConversation === null ? (
       <div className="flex items-center justify-center w-full h-full">
         <div className="px-4 text-center text-2xl text-gray-800 font-semibold flex flex-col items-center gap-2">
@@ -130,7 +130,7 @@ setMessage([...messages,data])
           ) : (
             messages?.map((message, index) => (
               <div key={index} ref={lastMessageRef} className={`chat ${message.senderId === auth?._id ? 'chat-end' : 'chat-start'} mb-4`}>
-                <div className="chat-bubble bg-sky-600 text-white px-4 py-2 rounded-lg shadow-md">{message.message}</div>
+                <div className=" bg-sky-600 text-white px-4 py-2 rounded-lg shadow-md">{message.message}</div>
                 <div className="chat-footer text-xs text-gray-400 mt-1">
                   {new Date(message?.createdAt).toLocaleDateString('en-In', { hour: 'numeric', minute: 'numeric' })}
                 </div>
