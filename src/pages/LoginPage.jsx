@@ -21,7 +21,7 @@ const navigate=useNavigate()
         console.log(response);
         toast.success(response.data.message);
         if(response) {
-            navigate('/home');
+            navigate('/');
           }
       } catch (error) {
         toast.error(error.response?.data?.message || "An error occurred");
@@ -86,7 +86,7 @@ const navigate=useNavigate()
         <div className="text-center mt-4">
           <p className="text-sm text-gray-600">
             Don't have an account?{' '}
-            <a href="/sign-up" className="text-blue-500 hover:underline">Sign up</a>
+            <a href="/user/sign-up" className="text-blue-500 hover:underline">Sign up</a>
           </p>
         </div>
       </div>

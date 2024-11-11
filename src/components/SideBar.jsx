@@ -105,7 +105,7 @@ export default function SideBar({ onSelectUser }) {
                 .then((response) => {
                     console.log(response);
                     toast.success(response.data.message);
-                    navigate('/');
+                    navigate('/user/login');
                 })
                 .catch((error) => {
                     console.error("Logout error:", error);

@@ -3,17 +3,19 @@ import LoginPage from "../pages/LoginPage";
 import RootLayout from "../Layout/RootLayout";
 import SignUpPage from "../pages/SignUpPage";
 import HomePage from "../pages/HomePage";
+import { UserAuth } from "./protectRoutes/UserAuth";
+import HomeLaypout from "../Layout/HomeLaypout";
 
 
 
 
 export const router=createBrowserRouter([
     {
-        path:"/",
+        path:"/user",
         element:<RootLayout/>,
         children:[
             {
-                path:"/",
+                path:"login",
                 element:<LoginPage/>
 
             },
@@ -23,8 +25,16 @@ export const router=createBrowserRouter([
 
             },
 
+
+        ]
+    },
+    {
+        path:"/",
+        element:<UserAuth><HomeLaypout/></UserAuth>,
+        children:[
+         
               {
-                path:"home",
+                path:"/",
                 element:<HomePage/>
 
             }

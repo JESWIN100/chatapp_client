@@ -3,7 +3,13 @@ import userConversation from '../store/conversationStore';
 import { axiosInstance } from '../config/axiosInstance';
 import { ArrowLeft, MessagesSquare, SendIcon } from 'lucide-react';
 import audio from '../assets/Sending Message Sound.mp3'
+import reciveSound from '../assets/Message recive Effect.mp3'
+
 import { useSocketContext } from '../config/socketContext';
+import Lottie from 'lottie-react';
+import loginAnimation from '../assets/Animation - 1731297775125 (1).json'; 
+
+
 
 export default function MessageContainer({ onBackUser }) {
   const { messages, selectedConversation, setMessage, setSelectedConversation } = userConversation();
@@ -17,9 +23,9 @@ export default function MessageContainer({ onBackUser }) {
 
 useEffect(()=>{
  socket?.on("newMessage",(newMessage)=>{
-  const sendSound = new Audio(audio);
-sendSound.volume = 0.3;
-sendSound.play()
+  const recivedSound = new Audio(reciveSound);
+// sendSound.volume = 0.3;
+recivedSound.play()
 setMessage([...messages,newMessage])
  })
  return()=>socket?.off("newMessage")
@@ -82,11 +88,13 @@ try {
 const send=await axiosInstance.post(`/message/send/${selectedConversation?._id}`,{message:sendData},{withCredentials:true})
 const data=await send.data
 console.log(data);
+const sendSound = new Audio(audio);
+// sendSound.volume = 0.3;
 
 setSending(false)
 setSendData('')
 setMessage([...messages,data])
-
+sendSound.play()
 
 } catch (error) {
   setSending(false)
@@ -104,7 +112,8 @@ setMessage([...messages,data])
         <div className="px-4 text-center text-2xl text-gray-800 font-semibold flex flex-col items-center gap-2">
           <p className="text-2xl">Welcome! 👋 {auth?.fullName}</p>
           <p className="text-lg text-gray-600">Select a chat to start messaging</p>
-          <MessagesSquare className="w-full h-10 text-center text-sky-500" />
+          {/* <MessagesSquare className="w-full h-10 text-center text-sky-500" /> */}
+          <Lottie animationData={loginAnimation} loop={true} className=" ml-8 w-96 h-96" />
         </div>
       </div>
     ) : (
