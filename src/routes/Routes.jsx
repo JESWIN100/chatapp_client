@@ -5,6 +5,7 @@ import SignUpPage from "../pages/SignUpPage";
 import HomePage from "../pages/HomePage";
 import { UserAuth } from "./protectRoutes/UserAuth";
 import HomeLaypout from "../Layout/HomeLaypout";
+import ProfilePage from "../pages/ProfilePage";
 
 
 
@@ -37,7 +38,12 @@ export const router=createBrowserRouter([
                 path:"/",
                 element:<HomePage/>
 
+            },
+            {
+                path:"profile",
+                element:<ProfilePage/>
             }
+
 
         ]
     }

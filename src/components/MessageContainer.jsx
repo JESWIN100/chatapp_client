@@ -129,24 +129,28 @@ sendSound.play()
 </div>
 
   
-        <div className="flex-1 overflow-auto bg-white rounded-lg p-4 shadow-inner">
-          {loading ? (
-            <div className="flex w-full h-full justify-center items-center">
-              <div className="loading loading-spinner text-sky-500"></div>
-            </div>
-          ) : messages?.length === 0 ? (
-            <p className="text-center text-gray-500 mt-4">Send a message to start a conversation 😉</p>
-          ) : (
-            messages?.map((message, index) => (
-              <div key={index} ref={lastMessageRef} className={`chat ${message.senderId === auth?._id ? 'chat-end' : 'chat-start'} mb-4`}>
-                <div className=" bg-sky-600 text-white px-4 py-2 rounded-lg shadow-md">{message.message}</div>
-                <div className="chat-footer text-xs text-gray-400 mt-1">
-                  {new Date(message?.createdAt).toLocaleDateString('en-In', { hour: 'numeric', minute: 'numeric' })}
-                </div>
-              </div>
-            ))
-          )}
+<div className="flex-1 overflow-auto bg-white rounded-lg p-4 shadow-inner" style={{  backgroundImage: `url('https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg')` }}>
+  {loading ? (
+    <div className="flex w-full h-full justify-center items-center">
+      <div className="loading loading-spinner text-sky-500"></div>
+    </div>
+  ) : messages?.length === 0 ? (
+    <p className="text-center text-gray-500 mt-4">Send a message to start a conversation 😉</p>
+  ) : (
+    messages?.map((message, index) => (
+      <div key={index} ref={lastMessageRef} className={`chat ${message.senderId === auth?._id ? 'chat-end' : 'chat-start'} mb-4`}>
+  
+        <div className={`px-4 py-2 rounded-lg shadow-md ${message.senderId === auth?._id ? 'bg-lime-700 text-white' : 'bg-gray-300 text-gray-800'}`}>
+          {message.message}
         </div>
+        <div className="chat-footer text-xs text-gray-900 mt-1">
+          {new Date(message?.createdAt).toLocaleDateString('en-In', { hour: 'numeric', minute: 'numeric' })}
+        </div>
+      </div>
+    ))
+  )}
+</div>
+
   
         <form onSubmit={handleSubmit} className="mt-3">
           <div className="flex items-center bg-white border border-gray-300 rounded-full shadow-sm">

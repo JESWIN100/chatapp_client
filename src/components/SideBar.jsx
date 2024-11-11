@@ -117,6 +117,10 @@ export default function SideBar({ onSelectUser }) {
         }
     };
 
+    const naviagtePage = () => {
+        navigate('/profile'); 
+    };
+    
 
 
     return (
@@ -136,9 +140,10 @@ export default function SideBar({ onSelectUser }) {
                 </form>
                 <div></div>
                 <img
-                    src="https://st5.depositphotos.com/20923550/70467/v/450/depositphotos_704675848-stock-illustration-cute-cartoon-boy-baseball-cap.jpg"
+                    src={auth?.profilePic}
                     alt="profile"
                     className="h-12 w-12 rounded-full cursor-pointer"
+                    onClick={naviagtePage}
                 />
             </div>
 
@@ -148,15 +153,15 @@ export default function SideBar({ onSelectUser }) {
                 <div className="max-h-screen overflow-y-auto"> {/* Make the results scrollable */}
                     {searchResult.map((user, index) => (
                         <div
-                            key={user._id}
+                            key={user?._id}
                             className="flex items-center space-x-4 p-2 cursor-pointer hover:bg-gray-200 rounded-lg"
                             onClick={() => handleUserClick(user)}
                         >
                             <div className={`avatar w-10 h-10 rounded-full ${isOnline[index] ? 'online' : ''}`}>
-                                <img src={user.profilePic} alt={user.userName} className="w-10 h-10 rounded-full" />
+                                <img src={user?.profilePic} alt={user?.userName} className="w-10 h-10 rounded-full" />
                             </div>
 
-                            <span>{user.userName}</span>
+                            <span>{user?.userName}</span>
                         </div>
                     ))}
                     <div className='mt-auto px-1 py-1 flex'>
@@ -175,19 +180,19 @@ export default function SideBar({ onSelectUser }) {
                             <p>Search for someone to chat with!</p>
                         </div>
                     ) : (
-                        <div className=" overflow-y-auto"> {/* Make the chat list scrollable */}
+                        <div className=" overflow-y-auto"> 
                             {chatUser.map((user, index) => (
                                 <div
-                                    key={user._id}
-                                    className={`flex items-center space-x-4 p-2  cursor-pointer hover:bg-gray-200 rounded-lg ${selectedUserId === user._id ? 'bg-sky-100' : ''
+                                    key={user?._id}
+                                    className={`flex items-center space-x-4 p-2  cursor-pointer hover:bg-gray-200 rounded-lg ${selectedUserId === user?._id ? 'bg-sky-100' : ''
                                         }`}
                                     onClick={() => handleUserClick(user)}
                                 >
                                     <div className={`avatar w-10 h-10 rounded-full ${isOnline[index] ? 'online' : ''}`}>
-                                        <img src={user.profilePic} alt={user.userName} className="w-10 h-10 rounded-full" />
+                                        <img src={user?.profilePic} alt={user?.userName} className="w-10 h-10 rounded-full" />
                                     </div>
 
-                                    <span>{user.userName}</span>
+                                    <span>{user?.userName}</span>
 
                                     <div className='pl-40 items-center flex justify-center'>
                                         { newMessageUsers.reciverId === auth?._id && newMessageUsers.senderId === user?._id ?
