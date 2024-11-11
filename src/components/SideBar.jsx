@@ -104,6 +104,7 @@ export default function SideBar({ onSelectUser }) {
             axiosInstance.post('/user/logout', {}, { withCredentials: true })
                 .then((response) => {
                     console.log(response);
+                    res.clearCookie('jwt', { path: '/', httpOnly: true, secure: true }); 
                     toast.success(response.data.message);
                     navigate('/user/login');
                 })
