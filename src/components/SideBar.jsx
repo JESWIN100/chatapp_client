@@ -104,7 +104,6 @@ export default function SideBar({ onSelectUser }) {
             axiosInstance.post('/user/logout', {}, { withCredentials: true })
                 .then((response) => {
                     console.log(response);
-                
                     toast.success(response.data.message);
                     navigate('/user/login');
                 })
@@ -143,7 +142,7 @@ export default function SideBar({ onSelectUser }) {
                 <img
                     src={auth?.profilePic}
                     alt="profile"
-                    className="h-12 w-12 rounded-full cursor-pointer"
+                    className="h-12 w-12 rounded-full  cursor-pointer object-cover"
                     onClick={naviagtePage}
                 />
             </div>

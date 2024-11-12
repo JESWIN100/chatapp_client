@@ -93,7 +93,7 @@ console.log(response);
           <div className="relative">
             <img
               alt="Profile picture of Jessica"
-              className="w-24 h-24 rounded-full"
+              className="w-24 h-24 rounded-full object-cover "
               src={profile?.profilePic}
             />
             <div className="absolute bottom-0 right-0 p-1 bg-green-600 text-cyan-100 rounded-full cursor-pointer">

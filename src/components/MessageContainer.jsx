@@ -139,11 +139,15 @@ sendSound.play()
   ) : (
     messages?.map((message, index) => (
       <div key={index} ref={lastMessageRef} className={`chat ${message.senderId === auth?._id ? 'chat-end' : 'chat-start'} mb-4`}>
-  
+  <img 
+    className="rounded-full w-10 h-10 cursor-pointer shadow-sm" 
+    src={message.senderId === auth?._id ? auth.profilePic : selectedConversation?.profilePic} 
+    alt="Profile"
+  />
         <div className={`px-4 py-2 rounded-lg shadow-md ${message.senderId === auth?._id ? 'bg-lime-700 text-white' : 'bg-gray-300 text-gray-800'}`}>
           {message.message}
         </div>
-        <div className="chat-footer text-xs text-gray-900 mt-1">
+        <div className="chat-footer  text-xs text-gray-900 mt-1">
           {new Date(message?.createdAt).toLocaleDateString('en-In', { hour: 'numeric', minute: 'numeric' })}
         </div>
       </div>
