@@ -8,6 +8,7 @@ import { app } from '../config/firbase';
 
 export default function SignUpPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [img,setImg]=useState()
   const navigate = useNavigate();
   const {
     register,
@@ -27,6 +28,7 @@ export default function SignUpPage() {
     try {
       const resultFromGoogle = await signInWithPopup(auth, provider);
       const user = resultFromGoogle.user;
+      setImg(user)
       console.log(user);
 
       // Prefill the form with Google user data
@@ -36,8 +38,10 @@ export default function SignUpPage() {
       console.log(error);
     }
   };
+ 
 
   const onSubmit = async (data) => {
+  
     if (data.password !== confirmPassword) {
       setError('confirmPassword', {
         type: 'manual',
@@ -46,8 +50,13 @@ export default function SignUpPage() {
       return;
     }
 
+    const userData = {
+      ...data,  // Spread the form data
+      image: img?.photoURL
+
+    };
     try {
-      const response = await axiosInstance.post('/user/create', data);
+      const response = await axiosInstance.post('/user/create',userData);
       console.log(response.data);
       if (response) {
         toast.success(response.data.message);
