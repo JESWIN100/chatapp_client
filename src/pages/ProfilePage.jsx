@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { axiosInstance } from '../config/axiosInstance';
 import { Camera } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState(null);
@@ -52,11 +53,12 @@ export default function ProfilePage() {
                 },
             });
 console.log(response);
-
+toast.success(response.data.message)
+fetchProfile()
             setMessage(response.data.message);
         } catch (err) {
           console.log(err);
-          
+          toast.error(err.response?.data?.message)
             setError(err.response?.data?.message || 'Error updating profile picture');
         }
     };
