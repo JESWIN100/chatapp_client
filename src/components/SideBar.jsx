@@ -80,8 +80,6 @@ export default function SideBar({ onSelectUser }) {
       useEffect(() => {
         checkAuth();
       }, []);
-    
-
     // Handle user click
     const handleUserClick = (user) => {
         onSelectUser(user)
@@ -121,10 +119,11 @@ export default function SideBar({ onSelectUser }) {
         navigate('/profile'); 
     };
     
+console.log(auth?.profilePic);
 
 
     return (
-        <div className="h-full shadow-lg rounded-lg p-4">
+        <div className="h-full rounded-lg p-4">
             <div className="flex justify-between gap-2 items-center mb-4">
                 <form onSubmit={handleSearchSubmit} className="flex items-center w-full space-x-2">
                     <input

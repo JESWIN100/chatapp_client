@@ -51,7 +51,7 @@ export default function LoginPage() {
     setErrorMessage('');
 
     try {
-      const response = await axiosInstance.post("/user/Namelogin", { userName: data.username }, { withCredentials: true });
+      const response = await axiosInstance.post("/user/Namelogin", { userName: data.username,password:data.password }, { withCredentials: true });
       toast.success(response.data.message);
       navigate('/');
     } catch (error) {
@@ -81,7 +81,23 @@ export default function LoginPage() {
             {errors.username && <p className="text-red-500 text-sm mt-1">{errors.username.message}</p>}
           </div>
 
+
+          <div>
+            <label htmlFor="password" className="block text-slate-900">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Your password Here"
+              {...register('password', { required: 'password is required' })}
+              className="w-full p-3 border border-gray-300 bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+          </div>
+
           {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
+
+
+
 
           <button
             type="submit"

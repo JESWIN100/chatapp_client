@@ -73,6 +73,7 @@ setMessage([...messages,newMessage])
     checkAuth();
   }, []);
 
+  
   const handleMessage = (e) => {
     setSendData(e.target.value)
   }
