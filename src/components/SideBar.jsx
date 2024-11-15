@@ -98,14 +98,10 @@ export default function SideBar({ onSelectUser }) {
         console.log("Initiating logout");
     
         // Function to clear cookies
-        const clearCookies = () => {
-            const cookies = document.cookie.split("; ");
-            for (let cookie of cookies) {
-                const [name] = cookie.split("=");
-                document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-            }
-            alert("All cookies have been cleared!");
+        const clearJWT = () => {
+            document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=chatapp-server-roy9.onrender.com; Secure; SameSite=Strict";
         };
+        
     
         // Prompt the user before making the API call
         if (window.confirm('Are you sure you want to logout?')) {
@@ -113,7 +109,7 @@ export default function SideBar({ onSelectUser }) {
                 .then((response) => {
                     console.log(response);
                     // Clear cookies
-                    clearCookies();
+                    clearJWT();
                     toast.success(response.data.message);
                     navigate('/user/login');
                 })
