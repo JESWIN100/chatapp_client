@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import userConversation from '../store/conversationStore';
 import { useSocketContext } from '../config/socketContext';
+import Cookies from 'js-cookie';
 
 export default function SideBar({ onSelectUser }) {
     const [searchInput, setSearchInput] = useState('');
@@ -97,19 +98,13 @@ export default function SideBar({ onSelectUser }) {
     const handleLogout = () => {
         console.log("Initiating logout");
     
-        // Function to clear cookies
-        const clearJWT = () => {
-            document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=chatapp-server-roy9.onrender.com; Secure; SameSite=Strict";
-        };
-        
     
         // Prompt the user before making the API call
         if (window.confirm('Are you sure you want to logout?')) {
             axiosInstance.post('/user/logout', {}, { withCredentials: true })
                 .then((response) => {
                     console.log(response);
-                    // Clear cookies
-                    clearJWT();
+                    Cookies.remove('jwt');
                     toast.success(response.data.message);
                     navigate('/user/login');
                 })
