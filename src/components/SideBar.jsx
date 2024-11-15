@@ -96,12 +96,24 @@ export default function SideBar({ onSelectUser }) {
     }
     const handleLogout = () => {
         console.log("Initiating logout");
-
+    
+        // Function to clear cookies
+        const clearCookies = () => {
+            const cookies = document.cookie.split("; ");
+            for (let cookie of cookies) {
+                const [name] = cookie.split("=");
+                document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            }
+            alert("All cookies have been cleared!");
+        };
+    
         // Prompt the user before making the API call
         if (window.confirm('Are you sure you want to logout?')) {
             axiosInstance.post('/user/logout', {}, { withCredentials: true })
                 .then((response) => {
                     console.log(response);
+                    // Clear cookies
+                    clearCookies();
                     toast.success(response.data.message);
                     navigate('/user/login');
                 })
@@ -114,7 +126,7 @@ export default function SideBar({ onSelectUser }) {
             console.log("Logout canceled");
         }
     };
-
+    
     const naviagtePage = () => {
         navigate('/profile'); 
     };
